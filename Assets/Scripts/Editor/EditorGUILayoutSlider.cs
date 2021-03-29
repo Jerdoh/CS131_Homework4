@@ -5,7 +5,7 @@ public class EditorGUILayoutSlider : EditorWindow
 {
     static float scale = 0.0f;
 
-    [MenuItem("Examples/Editor GUILayout Slider usage")]
+    [MenuItem("Tools/Custom/Editor GUILayout Slider usage")]
     static void Init()
     {
         EditorWindow window = GetWindow(typeof(EditorGUILayoutSlider));
