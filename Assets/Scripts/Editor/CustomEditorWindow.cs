@@ -13,7 +13,7 @@ public class CustomEditorWindow : EditorWindow
 
     [MenuItem("Tools/Custom/Custom Editor Window")]
     
-    public static void CreateWindow()
+    static void Init()//public static void CreateWindow()
     {
         instance = EditorWindow.GetWindow<CustomEditorWindow>();
         instance.Show();
@@ -61,13 +61,15 @@ public class CustomEditorWindow : EditorWindow
         GUILayout.Space(15);
 
         //Resize the current selection
+        // This code doesn't work, however when placed in it's own window/file it does
+        //  which is the same issue I had with EditorGUILayout.Slider
         GUILayout.Label("Resize Current Selection", EditorStyles.boldLabel);
-        float sizeMultiplier = 1.0f;
-        sizeMultiplier = EditorGUILayout.FloatField("Increase scale by: ", sizeMultiplier);
+        float sizeMultiplier2 = 1.0f;
+        sizeMultiplier2 = EditorGUILayout.FloatField("Increase scale by: ", sizeMultiplier2);
 
-        if(GUILayout.Button("Reset Selected Object Size"))
+        if(GUILayout.Button("Resize"))
         {
-            DoResize(Selection.activeGameObject, sizeMultiplier);
+            Selection.activeTransform.localScale *= sizeMultiplier2;
         }      
     }
 
@@ -103,10 +105,5 @@ public class CustomEditorWindow : EditorWindow
         var tempMaterial = new Material(objectRenderer.sharedMaterial);
         tempMaterial.color = colorArray[Random.Range(0,colorArray.Length)];
         objectRenderer.sharedMaterial = tempMaterial;
-    }
-
-    private void DoResize(GameObject selectedObject, float sizeMultiplier)
-    {
-        selectedObject.transform.localScale *= sizeMultiplier;
     }
 }
